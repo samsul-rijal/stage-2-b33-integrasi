@@ -11,6 +11,9 @@ import dataContact from '../fakeData/contact';
 
 export default function ComplainAdmin() {
   const [state] = useContext(UserContext);
+
+  console.log(state);
+
   const [contact, setContact] = useState(null);
 
   const title = 'Complain admin';
