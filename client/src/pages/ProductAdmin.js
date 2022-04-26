@@ -3,13 +3,16 @@ import { Container, Row, Col, Table, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import ShowMoreText from 'react-show-more-text';
 import rupiahFormat from 'rupiah-format';
-import { useQuery, useMutation } from 'react-query';
+
+// Import useQuery here ...
+import { useQuery } from 'react-query';
 
 import NavbarAdmin from '../components/NavbarAdmin';
 import DeleteData from '../components/modal/DeleteData';
 
 import imgEmpty from '../assets/empty.svg';
 
+// Get API config here ...
 import { API } from '../config/api';
 
 export default function ProductAdmin() {
@@ -18,7 +21,8 @@ export default function ProductAdmin() {
   const title = 'Product admin';
   document.title = 'DumbMerch | ' + title;
 
-  let { data: products, refetch } = useQuery('productsCache', async () => {
+  // Create process for fetching products data from database with useQuery here ...
+  let { data: products } = useQuery('productsCache', async () => {
     const response = await API.get('/products');
     return response.data.data;
   });
@@ -109,7 +113,7 @@ export default function ProductAdmin() {
                         >
                           Edit
                         </Button>
-                        <Button
+                        {/* <Button
                           onClick={() => {
                             handleDelete(item.id);
                           }}
@@ -117,7 +121,7 @@ export default function ProductAdmin() {
                           style={{ width: '135px' }}
                         >
                           Delete
-                        </Button>
+                        </Button> */}
                       </td>
                     </tr>
                   ))}
@@ -137,11 +141,11 @@ export default function ProductAdmin() {
           </Col>
         </Row>
       </Container>
-      <DeleteData
+      {/* <DeleteData
         setConfirmDelete={setConfirmDelete}
         show={show}
         handleClose={handleClose}
-      />
+      /> */}
     </>
   );
 }
