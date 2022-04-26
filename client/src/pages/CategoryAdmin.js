@@ -3,6 +3,8 @@ import { Container, Row, Col, Table, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 
 // Import useQuery here ...
+import { useQuery } from 'react-query';
+
 
 import NavbarAdmin from '../components/NavbarAdmin';
 import DeleteData from '../components/modal/DeleteData';
@@ -10,6 +12,7 @@ import DeleteData from '../components/modal/DeleteData';
 import imgEmpty from '../assets/empty.svg';
 
 // Get API config here ...
+import { API } from '../config/api';
 
 export default function CategoryAdmin() {
   let navigate = useNavigate();
@@ -18,6 +21,11 @@ export default function CategoryAdmin() {
   document.title = 'DumbMerch | ' + title;
 
   // Create process for fetching categories data from database with useQuery here ...
+  let { data: categories } = useQuery('categoriesCache', async () => {
+    const response = await API.get('/categories');
+    return response.data.data;
+  });
+
 
   const handleEdit = (id) => {
     navigate(`/update-category/${id}`);
@@ -74,7 +82,7 @@ export default function CategoryAdmin() {
                         >
                           Edit
                         </Button>
-                        <Button
+                        {/* <Button
                           onClick={() => {
                             handleDelete(item.id);
                           }}
@@ -82,7 +90,7 @@ export default function CategoryAdmin() {
                           style={{ width: '135px' }}
                         >
                           Delete
-                        </Button>
+                        </Button> */}
                       </td>
                     </tr>
                   ))}
@@ -102,11 +110,11 @@ export default function CategoryAdmin() {
           </Col>
         </Row>
       </Container>
-      <DeleteData
+      {/* <DeleteData
         setConfirmDelete={setConfirmDelete}
         show={show}
         handleClose={handleClose}
-      />
+      /> */}
     </>
   );
 }
