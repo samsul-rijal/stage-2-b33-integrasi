@@ -33,6 +33,7 @@ function App() {
       <Route path="/add-product" element={<AddProductAdmin />} />
       <Route path="/update-product/:id" element={<UpdateProductAdmin />} />
     </Routes>
+
   );
 }
 
